@@ -1,7 +1,7 @@
 FROM golang:1.15-alpine3.12 AS BUILD
 
 ENV CLICKHOUSE_EXPORTER_RELEASE master
-ENV CLICKHOUSE_EXPORTER_COMMIT 3c6a60b49e94a35a3a109a362b77381ebc364d49
+ENV CLICKHOUSE_EXPORTER_COMMIT feaaedaa072aaed3b776147007a2a8686780b9ce
 ENV BUILD_PATH /go/src/github.com/Percona-Lab
 ENV GIT_REPO https://github.com/ClickHouse/clickhouse_exporter.git
 
