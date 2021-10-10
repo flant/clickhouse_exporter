@@ -1,8 +1,8 @@
-FROM golang:1.15-alpine3.12 AS BUILD
+FROM golang:1.16-alpine3.14 AS BUILD
 
 ENV CLICKHOUSE_EXPORTER_RELEASE master
-ENV CLICKHOUSE_EXPORTER_COMMIT feaaedaa072aaed3b776147007a2a8686780b9ce
-ENV BUILD_PATH /go/src/github.com/Percona-Lab
+ENV CLICKHOUSE_EXPORTER_COMMIT abefd8b7803076a713daec4fb369fca5fc261942
+ENV BUILD_PATH /go/src/github.com/ClickHouse
 ENV GIT_REPO https://github.com/ClickHouse/clickhouse_exporter.git
 
 RUN mkdir -p ${BUILD_PATH} && \
@@ -11,10 +11,10 @@ RUN mkdir -p ${BUILD_PATH} && \
     git clone ${GIT_REPO} -b ${CLICKHOUSE_EXPORTER_RELEASE} && \
     cd clickhouse_exporter && \
     git checkout ${CLICKHOUSE_EXPORTER_COMMIT} && \
-    export GO111MODULE=on && make init && \
-    unset GO111MODULE && make build
+    make init && \
+    make build
 
-FROM alpine:3.12
+FROM alpine:3.14
 
 COPY --from=BUILD /go/bin/clickhouse_exporter /usr/local/bin/clickhouse_exporter
 

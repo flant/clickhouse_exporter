@@ -1,0 +1,19 @@
+---
+version: '3'
+services:
+  clickhouse:
+    image: yandex/clickhouse-server
+    ports:
+      - 127.0.0.1:8123:8123
+      - 127.0.0.1:9000:9000
+      - 127.0.0.1:9009:9009
+  clickhouse_exporter:
+    image: flant/clickhouse-exporter
+    ports:
+      - 127.0.0.1:9116:9116
+    links:
+      - "clickhouse"
+    command:
+      - -scrape_uri
+      - http://clickhouse:8123
+    
