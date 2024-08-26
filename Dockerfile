@@ -14,7 +14,7 @@ RUN mkdir -p ${BUILD_PATH} && \
     make init && \
     make build
 
-FROM alpine:3.14
+FROM alpine:3.20@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5
 
 COPY --from=BUILD /go/bin/clickhouse_exporter /usr/local/bin/clickhouse_exporter
 
