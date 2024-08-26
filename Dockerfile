@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine3.14 AS BUILD
+FROM golang:1.16-alpine3.14@sha256:7d3ff18f693e2d4d7f2377f03efaba8b8d8884837debc8db475f07500749276e AS BUILD
 
 ENV CLICKHOUSE_EXPORTER_RELEASE master
 ENV CLICKHOUSE_EXPORTER_COMMIT abefd8b7803076a713daec4fb369fca5fc261942
@@ -14,7 +14,7 @@ RUN mkdir -p ${BUILD_PATH} && \
     make init && \
     make build
 
-FROM alpine:3.14
+FROM alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed
 
 COPY --from=BUILD /go/bin/clickhouse_exporter /usr/local/bin/clickhouse_exporter
 
